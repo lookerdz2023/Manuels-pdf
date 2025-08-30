@@ -1,22 +1,12 @@
-name: Deploy to GitHub Pages and Netlify
+name: Deploy to Netlify
 
 on:
   push:
     branches: [ "main" ]
   workflow_dispatch:
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
-
 jobs:
-  # --- Job 1: Build de l'application (ne change pas) ---
-  build:
+  deploy-netlify:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -34,55 +24,10 @@ jobs:
       - name: Build project
         run: npm run build
 
-      - name: Upload artifact for deployment jobs
-        uses: actions/upload-artifact@v4
-        with:
-          name: dist-folder
-          path: ./dist
-
-  # --- Job 2: Déploiement sur GitHub Pages (MODIFIÉ) ---
-  deploy-github-pages:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Download artifact from build job
-        uses: actions/download-artifact@v4
-        with:
-          name: dist-folder
-          path: ./dist # Télécharge dans un dossier ./dist
-
-      # Étape cruciale : préparer l'artefact pour GitHub Pages
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
-      # Étape cruciale : Uploader l'artefact dans un format que GH Pages comprend
-      - name: Upload artifact for GitHub Pages
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: './dist'
-
-      # Étape finale : Déployer l'artefact qui vient d'être uploadé
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
-
-  # --- Job 3: Déploiement sur Netlify (ne change pas) ---
-  deploy-netlify:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Download artifact from build job
-        uses: actions/download-artifact@v4
-        with:
-          name: dist-folder
-
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v3.0
         with:
-          publish-dir: '.'
+          publish-dir: './dist' # Le dossier à publier est 'dist'
           github-token: ${{ secrets.GITHUB_TOKEN }}
           deploy-message: "Deploy from GitHub Actions"
         env:
