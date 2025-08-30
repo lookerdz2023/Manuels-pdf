@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, CSSProperties } from 'react';
 import type { Book } from './types';
 import { fetchAndParseBooks } from './services/dataService';
 import CustomSelect from './components/Select';
 import BookCover from './components/BookCover';
 
-const telegramButtonStyle = {
+const telegramButtonStyle: CSSProperties = {
   display: 'inline-block',
   padding: '10px 20px',
   margin: '20px 0',
@@ -109,12 +109,14 @@ const App: React.FC = () => {
       {!loading && !error && (
         <main style={{ marginTop: '30px' }}>
           <CustomSelect
+            id="level-select"
             label="Niveau"
             value={selectedLevel}
             options={levels}
             onChange={handleLevelChange}
           />
           <CustomSelect
+            id="subject-select"
             label="Matière"
             value={selectedSubject}
             options={subjects}
@@ -122,6 +124,7 @@ const App: React.FC = () => {
             disabled={!selectedLevel}
           />
           <CustomSelect
+            id="title-select"
             label="Titre"
             value={selectedTitle}
             options={titles}

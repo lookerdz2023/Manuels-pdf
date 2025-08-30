@@ -19,21 +19,18 @@ const BookCover: React.FC<BookCoverProps> = ({ coverUrl, pdfUrl }) => {
       La couverture du livre apparaîtra ici.
     </div>
   );
-
   const image = (
     <img
       src={coverUrl || ''}
       alt="Couverture du livre"
       style={{
-        maxWidth: '300px',  // Limite la largeur à 300px maximum
-        height: 'auto',     // La hauteur s'ajustera automatiquement pour garder les proportions
-        display: 'block'    // Empêche les espaces indésirables sous l'image
+        maxWidth: '300px',
+        height: 'auto',
+        display: 'block'
       }}
     />
   );
-
   const content = coverUrl ? image : placeholder;
-
   if (pdfUrl && coverUrl) {
     return (
       <a href={pdfUrl} target="_blank" rel="noopener noreferrer">
@@ -41,7 +38,6 @@ const BookCover: React.FC<BookCoverProps> = ({ coverUrl, pdfUrl }) => {
       </a>
     );
   }
-
   return <div>{content}</div>;
 };
 
