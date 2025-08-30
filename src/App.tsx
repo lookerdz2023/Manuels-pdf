@@ -97,12 +97,12 @@ const App: React.FC = () => {
       <header style={{ textAlign: 'center' }}>
         <h1>Manuels PDF</h1>
         <a
-          href="https://t.me/joinchat/+IYnhtbsCFy0yNDZk"
+          href="https://t.me/+IYnhtbsCFy0yNDZk"
           target="_blank"
           rel="noopener noreferrer"
           style={telegramButtonStyle}
         >
-          Join Telegram group to download
+          To download join Telegram group
         </a>
       </header>
       {loading && <p>Chargement des données...</p>}
