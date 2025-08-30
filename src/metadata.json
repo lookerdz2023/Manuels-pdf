@@ -1,0 +1,5 @@
+{
+  "name": "Chercheur de Livres Scolaires",
+  "description": "Une application pour trouver et visualiser des couvertures de livres scolaires à partir de données d'une feuille Google Sheet, avec des filtres en cascade pour le niveau, la matière et le titre.",
+  "requestFramePermissions": []
+}
