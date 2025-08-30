@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useMemo, CSSProperties } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
+import type { CSSProperties } from 'react';
 import type { Book } from './types';
 import { fetchAndParseBooks } from './services/dataService';
 import CustomSelect from './components/Select';
